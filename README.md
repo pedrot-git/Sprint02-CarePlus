@@ -17,6 +17,8 @@ O prototipo usa um ESP32 simulado no Wokwi com:
 
 ## Arquitetura
 
+![Arquitetura CarePlus Sprint 02](docs/arquitetura-careplus.svg)
+
 ```mermaid
 flowchart LR
     A["ESP32 no Wokwi"] --> B["Broker MQTT Mosquitto :1883"]
@@ -35,6 +37,7 @@ CarePlus_Sprint02_Entrega/
   INTEGRANTES.txt
   CHECKLIST_ENTREGA.md
   docs/
+    arquitetura-careplus.svg
     arquitetura.md
     manual_operacao.md
     Challenge Care Plus - Sprints 2 e 3.pdf

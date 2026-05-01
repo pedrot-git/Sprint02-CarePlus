@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="930" viewBox="0 0 1280 930" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitetura CarePlus Sprint 02</title>
+  <desc id="desc">Arquitetura em camadas do projeto CarePlus: Application, Back-end FIWARE e Edge IoT.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2d3748"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7b3f98"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1d7c44"/>
+    </marker>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1a202c" flood-opacity="0.16"/>
+    </filter>
+    <linearGradient id="containerBlue" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#68d8ff"/>
+      <stop offset="1" stop-color="#0796d5"/>
+    </linearGradient>
+    <linearGradient id="containerDark" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#21aeea"/>
+      <stop offset="1" stop-color="#0878ad"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="930" fill="#ffffff"/>
+
+  <!-- Layer frames -->
+  <rect x="22" y="20" width="1236" height="205" fill="#fbf7ff" stroke="#8f5bb0" stroke-width="3"/>
+  <rect x="22" y="240" width="1236" height="475" fill="#f8fbff" stroke="#4d8cd7" stroke-width="3"/>
+  <rect x="22" y="735" width="1236" height="165" fill="#f7fff9" stroke="#178f73" stroke-width="3"/>
+
+  <text x="58" y="118" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#9a00c9">Application</text>
+  <text x="58" y="512" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#0064c8">Back-end</text>
+  <text x="58" y="822" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#00846f">Edge / IoT</text>
+
+  <!-- Application cards -->
+  <rect x="158" y="91" width="158" height="92" rx="14" fill="#d7e8f8" stroke="#2b5d7c" stroke-width="3"/>
+  <text x="237" y="129" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" fill="#5c6670">&#9679;</text>
+  <text x="237" y="164" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#1f2933">Postman</text>
+  <text x="237" y="182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#1f2933">NGSIv2 Client</text>
+
+  <rect x="360" y="91" width="660" height="92" rx="14" fill="#eadff1" stroke="#9a73b5" stroke-width="3"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#30343b" text-anchor="middle">
+    <text x="432" y="134" font-size="38">&#9881;</text>
+    <text x="432" y="164" font-size="15" font-weight="700">Rules API</text>
+    <text x="432" y="182" font-size="12">future</text>
+    <text x="568" y="134" font-size="38">&#9635;</text>
+    <text x="568" y="164" font-size="15" font-weight="700">Gamification</text>
+    <text x="568" y="182" font-size="12">missions</text>
+    <text x="704" y="134" font-size="38">&#9638;</text>
+    <text x="704" y="164" font-size="15" font-weight="700">Colab</text>
+    <text x="704" y="182" font-size="12">dashboard</text>
+    <text x="840" y="134" font-size="38">&#9636;</text>
+    <text x="840" y="164" font-size="15" font-weight="700">Analytics</text>
+    <text x="840" y="182" font-size="12">historical</text>
+    <text x="960" y="134" font-size="38">&#9743;</text>
+    <text x="960" y="164" font-size="15" font-weight="700">Mobile App</text>
+    <text x="960" y="182" font-size="12">future</text>
+  </g>
+
+  <rect x="148" y="197" width="66" height="24" rx="4" fill="#565656"/>
+  <rect x="208" y="197" width="32" height="24" rx="4" fill="#db5145"/>
+  <text x="181" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff">NGSI</text>
+  <text x="224" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff">v2</text>
+
+  <!-- Backend containers -->
+  <g filter="url(#softShadow)">
+    <g transform="translate(452 336)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">Orion</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">Context Broker</text>
+    </g>
+    <g transform="translate(712 336)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">STH-Comet</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">historical API</text>
+    </g>
+    <g transform="translate(974 336)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">MongoDB</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">historical</text>
+    </g>
+    <g transform="translate(448 565)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">IoT Agent</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">MQTT / UltraLight</text>
+    </g>
+    <g transform="translate(720 575)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">MongoDB</text>
+      <text x="90" y="188" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">internal</text>
+    </g>
+    <g transform="translate(448 725)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">MQTT Broker</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">Mosquitto</text>
+    </g>
+  </g>
+
+  <!-- Backend labels and logos -->
+  <text x="64" y="665" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#2f63b7">FIWARE</text>
+  <text x="205" y="665" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#4b5563">Docker</text>
+  <text x="205" y="693" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#168dd2">Compose</text>
+  <text x="597" y="744" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">1883</text>
+  <text x="514" y="536" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">4041</text>
+  <text x="553" y="323" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">1026</text>
+  <text x="814" y="323" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">8666</text>
+  <text x="1088" y="323" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">27017</text>
+
+  <!-- Edge strip -->
+  <rect x="166" y="790" width="1018" height="92" rx="16" fill="#dff2d8" stroke="#70b764" stroke-width="3"/>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" fill="#27313a">
+    <text x="266" y="831" font-size="38">&#9633;</text>
+    <text x="266" y="861" font-size="15" font-weight="700">ESP32</text>
+    <text x="266" y="878" font-size="12">Wokwi</text>
+    <text x="432" y="831" font-size="38">&#9671;</text>
+    <text x="432" y="861" font-size="15" font-weight="700">MPU6050</text>
+    <text x="432" y="878" font-size="12">steps</text>
+    <text x="598" y="831" font-size="38">&#9638;</text>
+    <text x="598" y="861" font-size="15" font-weight="700">OLED</text>
+    <text x="598" y="878" font-size="12">feedback</text>
+    <text x="764" y="831" font-size="38">&#9679;</text>
+    <text x="764" y="861" font-size="15" font-weight="700">Button</text>
+    <text x="764" y="878" font-size="12">validation</text>
+    <text x="930" y="831" font-size="38">&#9679;</text>
+    <text x="930" y="861" font-size="15" font-weight="700">LEDs</text>
+    <text x="930" y="878" font-size="12">status</text>
+    <text x="1096" y="831" font-size="38">&#9675;</text>
+    <text x="1096" y="861" font-size="15" font-weight="700">CarePlus</text>
+    <text x="1096" y="878" font-size="12">token001</text>
+  </g>
+
+  <!-- Protocol arrows -->
+  <line x1="538" y1="790" x2="538" y2="724" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+  <line x1="538" y1="718" x2="538" y2="636" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+  <line x1="538" y1="560" x2="538" y2="482" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+  <line x1="628" y1="432" x2="712" y2="432" stroke="#2d3748" stroke-width="3" stroke-dasharray="5 6" marker-end="url(#arrow)"/>
+  <line x1="892" y1="432" x2="974" y2="432" stroke="#2d3748" stroke-width="3" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+  <line x1="628" y1="624" x2="720" y2="624" stroke="#2d3748" stroke-width="3" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+  <line x1="538" y1="565" x2="538" y2="482" stroke="#2d3748" stroke-width="2" stroke-dasharray="4 8"/>
+  <line x1="720" y1="624" x2="628" y2="624" stroke="#2d3748" stroke-width="2" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+
+  <!-- App to backend lines -->
+  <line x1="237" y1="197" x2="237" y2="314" stroke="#7b3f98" stroke-width="3" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="237" y1="314" x2="452" y2="382" stroke="#7b3f98" stroke-width="3" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="432" y1="197" x2="432" y2="565" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="704" y1="197" x2="704" y2="336" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="704" y1="197" x2="790" y2="336" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="960" y1="197" x2="1064" y2="336" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+
+  <!-- Port labels in application layer -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">
+    <text x="276" y="218">1026</text>
+    <text x="408" y="218">4041</text>
+    <text x="665" y="218">1026</text>
+    <text x="798" y="218">8666</text>
+    <text x="1088" y="218">27017</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(1010 580)" font-family="Arial, Helvetica, sans-serif" fill="#1f2933">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#7b3f98" stroke-width="3" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+    <text x="78" y="5" font-size="15" font-weight="700">NGSIv2 / HTTP</text>
+    <line x1="0" y1="42" x2="60" y2="42" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+    <text x="78" y="47" font-size="15" font-weight="700">MQTT</text>
+    <line x1="0" y1="84" x2="60" y2="84" stroke="#2d3748" stroke-width="3" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+    <text x="78" y="89" font-size="15" font-weight="700">MongoDB</text>
+  </g>
+
+  <!-- Data payload note -->
+  <rect x="70" y="260" width="305" height="125" rx="12" fill="#ffffff" stroke="#cad6e2" stroke-width="2"/>
+  <text x="92" y="292" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">CarePlusToken:token001</text>
+  <text x="92" y="322" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">Payload UltraLight MQTT:</text>
+  <text x="92" y="348" font-family="Consolas, monospace" font-size="13" fill="#374151">s|tracking|st|12|ps|12|tp|42</text>
+  <text x="92" y="370" font-family="Consolas, monospace" font-size="13" fill="#374151">b|99|al|moderate|ax|0.21...</text>
+</svg>
