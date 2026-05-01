@@ -17,6 +17,8 @@ O prototipo usa um ESP32 simulado no Wokwi com:
 
 ## Arquitetura
 
+![Arquitetura CarePlus Sprint 02](docs/arquitetura.png)
+
 O projeto esta organizado em tres camadas: Edge/IoT, Back-end FIWARE e Application. O ESP32 simulado no Wokwi publica telemetria via MQTT para o broker Mosquitto. O IoT Agent MQTT interpreta o payload UltraLight e atualiza a entidade no Orion Context Broker. O Orion mantem o estado atual e envia notificacoes para o STH-Comet, que persiste o historico. O Postman e usado para provisionamento/consultas e o Google Colab para visualizacao dos dados.
 
 ## Estrutura da pasta
@@ -27,6 +29,7 @@ CarePlus_Sprint02_Entrega/
   INTEGRANTES.txt
   CHECKLIST_ENTREGA.md
   docs/
+    arquitetura.png
     arquitetura.md
     manual_operacao.md
     Challenge Care Plus - Sprints 2 e 3.pdf
