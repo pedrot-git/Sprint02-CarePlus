@@ -1,250 +1,196 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="930" viewBox="0 0 1280 930" role="img" aria-labelledby="title desc">
   <title id="title">Arquitetura CarePlus Sprint 02</title>
-  <desc id="desc">Diagrama em camadas da arquitetura CarePlus Sprint 02 com Application, Back-end FIWARE e Edge IoT.</desc>
+  <desc id="desc">Arquitetura em camadas do projeto CarePlus: Application, Back-end FIWARE e Edge IoT.</desc>
   <defs>
-    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#6f3c96"/>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2d3748"/>
     </marker>
-    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#214f84"/>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7b3f98"/>
     </marker>
     <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#18784f"/>
+      <path d="M0,0 L0,6 L9,3 z" fill="#1d7c44"/>
     </marker>
-    <marker id="arrowGray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#3a4652"/>
-    </marker>
-    <linearGradient id="appBand" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fbf7ff"/>
-      <stop offset="1" stop-color="#eadcf4"/>
-    </linearGradient>
-    <linearGradient id="edgeBand" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f7fff9"/>
-      <stop offset="1" stop-color="#e1f4d8"/>
-    </linearGradient>
-    <linearGradient id="containerTop" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#9fefff"/>
-      <stop offset="1" stop-color="#15a4db"/>
-    </linearGradient>
-    <linearGradient id="containerSide" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1bb9ee"/>
-      <stop offset="1" stop-color="#0572a7"/>
-    </linearGradient>
-    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
-      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#17212b" flood-opacity="0.20"/>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1a202c" flood-opacity="0.16"/>
     </filter>
-    <style>
-      .label { font-family: Arial, Helvetica, sans-serif; fill: #1d2733; }
-      .small { font-family: Arial, Helvetica, sans-serif; fill: #344252; }
-      .mono { font-family: Consolas, "Courier New", monospace; fill: #26313d; }
-      .layer-title { font-family: Arial, Helvetica, sans-serif; font-size: 22px; font-weight: 700; }
-      .service-title { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: 700; fill: #182230; }
-      .service-sub { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #283646; }
-      .icon { font-family: Arial, Helvetica, sans-serif; font-size: 48px; fill: #2d333b; }
-      .port { font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 700; fill: #1d2733; }
-    </style>
+    <linearGradient id="containerBlue" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#68d8ff"/>
+      <stop offset="1" stop-color="#0796d5"/>
+    </linearGradient>
+    <linearGradient id="containerDark" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#21aeea"/>
+      <stop offset="1" stop-color="#0878ad"/>
+    </linearGradient>
   </defs>
 
-  <rect width="1400" height="980" fill="#ffffff"/>
+  <rect x="0" y="0" width="1280" height="930" fill="#ffffff"/>
 
   <!-- Layer frames -->
-  <rect x="18" y="18" width="1364" height="222" fill="url(#appBand)" stroke="#8c55aa" stroke-width="3"/>
-  <rect x="18" y="253" width="1364" height="520" fill="#fbfdff" stroke="#4f8fd9" stroke-width="3"/>
-  <rect x="18" y="788" width="1364" height="172" fill="url(#edgeBand)" stroke="#108a77" stroke-width="3"/>
+  <rect x="22" y="20" width="1236" height="205" fill="#fbf7ff" stroke="#8f5bb0" stroke-width="3"/>
+  <rect x="22" y="240" width="1236" height="475" fill="#f8fbff" stroke="#4d8cd7" stroke-width="3"/>
+  <rect x="22" y="735" width="1236" height="165" fill="#f7fff9" stroke="#178f73" stroke-width="3"/>
 
-  <!-- Brand and layer labels -->
-  <g transform="translate(48 91)">
-    <path d="M18 0 C8 0 0 8 0 18 C0 39 35 59 35 59 C35 59 70 39 70 18 C70 8 62 0 52 0 C44 0 38 5 35 12 C32 5 26 0 18 0 Z" fill="none" stroke="#23b8c8" stroke-width="7" stroke-linejoin="round"/>
-    <circle cx="35" cy="27" r="9" fill="#23b8c8"/>
-    <text x="84" y="38" class="label" font-size="39" font-weight="700" fill="#006ab6">care</text>
-    <text x="168" y="38" class="label" font-size="39" font-weight="400" fill="#3186c8">plus</text>
-    <text x="100" y="78" class="layer-title" fill="#a000c2">Application</text>
+  <text x="58" y="118" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#9a00c9">Application</text>
+  <text x="58" y="512" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#0064c8">Back-end</text>
+  <text x="58" y="822" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#00846f">Edge / IoT</text>
+
+  <!-- Application cards -->
+  <rect x="158" y="91" width="158" height="92" rx="14" fill="#d7e8f8" stroke="#2b5d7c" stroke-width="3"/>
+  <text x="237" y="129" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" fill="#5c6670">&#9679;</text>
+  <text x="237" y="164" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#1f2933">Postman</text>
+  <text x="237" y="182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#1f2933">NGSIv2 Client</text>
+
+  <rect x="360" y="91" width="660" height="92" rx="14" fill="#eadff1" stroke="#9a73b5" stroke-width="3"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#30343b" text-anchor="middle">
+    <text x="432" y="134" font-size="38">&#9881;</text>
+    <text x="432" y="164" font-size="15" font-weight="700">Rules API</text>
+    <text x="432" y="182" font-size="12">future</text>
+    <text x="568" y="134" font-size="38">&#9635;</text>
+    <text x="568" y="164" font-size="15" font-weight="700">Gamification</text>
+    <text x="568" y="182" font-size="12">missions</text>
+    <text x="704" y="134" font-size="38">&#9638;</text>
+    <text x="704" y="164" font-size="15" font-weight="700">Colab</text>
+    <text x="704" y="182" font-size="12">dashboard</text>
+    <text x="840" y="134" font-size="38">&#9636;</text>
+    <text x="840" y="164" font-size="15" font-weight="700">Analytics</text>
+    <text x="840" y="182" font-size="12">historical</text>
+    <text x="960" y="134" font-size="38">&#9743;</text>
+    <text x="960" y="164" font-size="15" font-weight="700">Mobile App</text>
+    <text x="960" y="182" font-size="12">future</text>
   </g>
-  <text x="58" y="334" class="layer-title" fill="#0064c8">Back-end</text>
-  <text x="58" y="881" class="layer-title" fill="#00846f">IoT</text>
 
-  <!-- Application band -->
-  <rect x="258" y="52" width="1075" height="153" rx="15" fill="#f0e3f7" stroke="#8c55aa" stroke-width="3"/>
-  <g text-anchor="middle">
-    <g transform="translate(380 75)">
-      <text y="42" class="icon">&#9678;</text>
-      <text y="78" class="service-title">Postman</text>
-      <text y="101" class="service-sub">Provisionamento</text>
+  <rect x="148" y="197" width="66" height="24" rx="4" fill="#565656"/>
+  <rect x="208" y="197" width="32" height="24" rx="4" fill="#db5145"/>
+  <text x="181" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff">NGSI</text>
+  <text x="224" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff">v2</text>
+
+  <!-- Backend containers -->
+  <g filter="url(#softShadow)">
+    <g transform="translate(452 336)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">Orion</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">Context Broker</text>
     </g>
-    <g transform="translate(565 75)">
-      <text y="42" class="icon">&#9638;</text>
-      <text y="78" class="service-title">Colab Dashboard</text>
-      <text y="101" class="service-sub">Python + graficos</text>
+    <g transform="translate(712 336)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">STH-Comet</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">historical API</text>
     </g>
-    <g transform="translate(750 75)">
-      <text y="42" class="icon">&#128187;</text>
-      <text y="78" class="service-title">Admin Dashboard</text>
-      <text y="101" class="service-sub">Aplicacao futura</text>
+    <g transform="translate(974 336)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">MongoDB</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">historical</text>
     </g>
-    <g transform="translate(935 75)">
-      <text y="42" class="icon">&#9881;</text>
-      <text y="78" class="service-title">Gamificacao</text>
-      <text y="101" class="service-sub">Missoes e pontos</text>
+    <g transform="translate(448 565)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">IoT Agent</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">MQTT / UltraLight</text>
     </g>
-    <g transform="translate(1120 75)">
-      <text y="42" class="icon">&#128241;</text>
-      <text y="78" class="service-title">Mobile App</text>
-      <text y="101" class="service-sub">Evolucao Sprint 3</text>
+    <g transform="translate(720 575)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">MongoDB</text>
+      <text x="90" y="188" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">internal</text>
+    </g>
+    <g transform="translate(448 725)">
+      <polygon points="0,26 122,0 180,32 58,60" fill="#8de6ff" stroke="#076b91" stroke-width="2"/>
+      <polygon points="58,60 180,32 180,116 58,146" fill="url(#containerDark)" stroke="#076b91" stroke-width="2"/>
+      <polygon points="0,26 58,60 58,146 0,112" fill="url(#containerBlue)" stroke="#076b91" stroke-width="2"/>
+      <path d="M92 54 h52 v76 h-52 z M102 60 v64 M116 57 v66 M130 55 v64" stroke="#065f89" stroke-width="2" fill="none"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">MQTT Broker</text>
+      <text x="90" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">Mosquitto</text>
     </g>
   </g>
-  <rect x="138" y="190" width="79" height="28" rx="4" fill="#545454"/>
-  <rect x="211" y="190" width="39" height="28" rx="4" fill="#8b22bd"/>
-  <text x="178" y="210" text-anchor="middle" class="label" font-size="15" font-weight="700" fill="#fff">NGSIv2</text>
-  <text x="231" y="210" text-anchor="middle" class="label" font-size="15" font-weight="700" fill="#fff">v2</text>
 
-  <!-- Reusable docker container shape groups -->
-  <g id="orion" transform="translate(292 325)" filter="url(#shadow)">
-    <polygon points="0,27 112,0 178,33 62,63" fill="url(#containerTop)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="62,63 178,33 178,119 62,151" fill="url(#containerSide)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="0,27 62,63 62,151 0,116" fill="#58cdf4" stroke="#075f8d" stroke-width="2"/>
-    <path d="M93 57 h54 v75 h-54 z M105 61 v67 M119 59 v67 M133 57 v67" fill="none" stroke="#075f8d" stroke-width="2"/>
-  </g>
-  <g id="iotagent" transform="translate(523 535)" filter="url(#shadow)">
-    <polygon points="0,27 112,0 178,33 62,63" fill="url(#containerTop)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="62,63 178,33 178,119 62,151" fill="url(#containerSide)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="0,27 62,63 62,151 0,116" fill="#58cdf4" stroke="#075f8d" stroke-width="2"/>
-    <path d="M93 57 h54 v75 h-54 z M105 61 v67 M119 59 v67 M133 57 v67" fill="none" stroke="#075f8d" stroke-width="2"/>
-  </g>
-  <g id="sth" transform="translate(754 325)" filter="url(#shadow)">
-    <polygon points="0,27 112,0 178,33 62,63" fill="url(#containerTop)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="62,63 178,33 178,119 62,151" fill="url(#containerSide)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="0,27 62,63 62,151 0,116" fill="#58cdf4" stroke="#075f8d" stroke-width="2"/>
-    <path d="M93 57 h54 v75 h-54 z M105 61 v67 M119 59 v67 M133 57 v67" fill="none" stroke="#075f8d" stroke-width="2"/>
-  </g>
-  <g id="broker" transform="translate(523 675)" filter="url(#shadow)">
-    <polygon points="0,27 112,0 178,33 62,63" fill="url(#containerTop)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="62,63 178,33 178,119 62,151" fill="url(#containerSide)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="0,27 62,63 62,151 0,116" fill="#58cdf4" stroke="#075f8d" stroke-width="2"/>
-    <path d="M93 57 h54 v75 h-54 z M105 61 v67 M119 59 v67 M133 57 v67" fill="none" stroke="#075f8d" stroke-width="2"/>
-  </g>
-  <g id="mongoInternal" transform="translate(754 535)" filter="url(#shadow)">
-    <polygon points="0,27 112,0 178,33 62,63" fill="url(#containerTop)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="62,63 178,33 178,119 62,151" fill="url(#containerSide)" stroke="#075f8d" stroke-width="2"/>
-    <polygon points="0,27 62,63 62,151 0,116" fill="#58cdf4" stroke="#075f8d" stroke-width="2"/>
-    <path d="M93 57 h54 v75 h-54 z M105 61 v67 M119 59 v67 M133 57 v67" fill="none" stroke="#075f8d" stroke-width="2"/>
-  </g>
-
-  <!-- Container labels -->
-  <g text-anchor="middle">
-    <text x="381" y="512" class="service-title">Orion</text>
-    <text x="381" y="535" class="service-sub">Context Broker</text>
-    <text x="612" y="722" class="service-title">IoT Agent MQTT</text>
-    <text x="612" y="745" class="service-sub">UltraLight 2.0</text>
-    <text x="843" y="512" class="service-title">STH-Comet</text>
-    <text x="843" y="535" class="service-sub">Historico</text>
-    <text x="612" y="862" class="service-title">MQTT Broker</text>
-    <text x="612" y="885" class="service-sub">Eclipse Mosquitto</text>
-    <text x="843" y="722" class="service-title">MongoDB</text>
-    <text x="843" y="745" class="service-sub">IoT Agent internal</text>
-  </g>
-
-  <!-- Data layer -->
-  <rect x="1148" y="377" width="178" height="318" rx="18" fill="#f7fbff" stroke="#5a91d7" stroke-width="3"/>
-  <text x="1237" y="414" text-anchor="middle" class="service-title" fill="#1c62ad">Data Layer</text>
-  <text x="1237" y="468" text-anchor="middle" class="icon" font-size="42">&#128274;</text>
-  <text x="1237" y="516" text-anchor="middle" class="icon" font-size="42">&#127793;</text>
-  <text x="1237" y="553" text-anchor="middle" class="service-title">MongoDB</text>
-  <text x="1237" y="574" text-anchor="middle" class="service-sub">Historical</text>
-  <text x="1237" y="632" text-anchor="middle" class="icon" font-size="42">&#128230;</text>
-  <text x="1237" y="668" text-anchor="middle" class="service-title">Persistencia</text>
-
-  <!-- Locks / badges -->
-  <text x="326" y="330" class="icon" font-size="28" fill="#1d68bf">&#128274;</text>
-  <text x="558" y="540" class="icon" font-size="28" fill="#1d68bf">&#128274;</text>
-  <text x="786" y="330" class="icon" font-size="28" fill="#1d68bf">&#9993;</text>
-  <text x="563" y="686" class="icon" font-size="28" fill="#1d68bf">&#128246;</text>
-
-  <!-- Protocol arrows between applications and backend -->
-  <line x1="380" y1="205" x2="380" y2="325" stroke="#6f3c96" stroke-width="3" stroke-dasharray="4 6" marker-end="url(#arrowPurple)"/>
-  <line x1="565" y1="205" x2="820" y2="325" stroke="#6f3c96" stroke-width="3" stroke-dasharray="4 6" marker-end="url(#arrowPurple)"/>
-  <line x1="750" y1="205" x2="406" y2="325" stroke="#6f3c96" stroke-width="2.5" stroke-dasharray="4 6" marker-end="url(#arrowPurple)"/>
-  <line x1="935" y1="205" x2="612" y2="535" stroke="#6f3c96" stroke-width="2.5" stroke-dasharray="4 6" marker-end="url(#arrowPurple)"/>
-  <line x1="1120" y1="205" x2="381" y2="325" stroke="#6f3c96" stroke-width="2" stroke-dasharray="4 6" marker-end="url(#arrowPurple)"/>
-  <text x="394" y="244" class="port">HTTPS / 1026</text>
-  <text x="582" y="244" class="port">HTTPS / 8666</text>
-  <text x="778" y="244" class="port">NGSIv2</text>
-
-  <!-- Backend relationships -->
-  <line x1="701" y1="610" x2="754" y2="610" stroke="#214f84" stroke-width="3" stroke-dasharray="4 6" marker-end="url(#arrowBlue)"/>
-  <line x1="612" y1="675" x2="612" y2="686" stroke="#18784f" stroke-width="3" stroke-dasharray="9 6" marker-end="url(#arrowGreen)"/>
-  <line x1="612" y1="535" x2="446" y2="445" stroke="#18784f" stroke-width="3" stroke-dasharray="9 6" marker-end="url(#arrowGreen)"/>
-  <line x1="470" y1="402" x2="754" y2="402" stroke="#214f84" stroke-width="3" stroke-dasharray="4 6" marker-end="url(#arrowBlue)"/>
-  <line x1="932" y1="402" x2="1148" y2="520" stroke="#3a4652" stroke-width="3" stroke-dasharray="2 10" marker-end="url(#arrowGray)"/>
-  <line x1="932" y1="610" x2="1148" y2="610" stroke="#3a4652" stroke-width="2.5" stroke-dasharray="2 10" marker-end="url(#arrowGray)"/>
-  <text x="626" y="392" class="port">1026</text>
-  <text x="934" y="392" class="port">8666</text>
-  <text x="638" y="524" class="port">4041</text>
-  <text x="634" y="672" class="port">1883</text>
-
-  <!-- Payload card -->
-  <rect x="82" y="408" width="210" height="188" rx="14" fill="#ffffff" stroke="#c8d7e6" stroke-width="2"/>
-  <text x="105" y="444" class="service-title">Entidade FIWARE</text>
-  <text x="105" y="474" class="mono" font-size="14">CarePlusToken:</text>
-  <text x="105" y="496" class="mono" font-size="14">token001</text>
-  <text x="105" y="532" class="small" font-size="14">Payload MQTT:</text>
-  <text x="105" y="557" class="mono" font-size="13">s|tracking|st|12</text>
-  <text x="105" y="578" class="mono" font-size="13">ps|12|tp|42|b|99</text>
-
-  <!-- Platform labels -->
-  <text x="66" y="706" class="label" font-size="30" font-weight="700" fill="#2d64b2">FIWARE</text>
-  <text x="190" y="706" class="label" font-size="30" font-weight="700" fill="#4b5563">docker</text>
-  <text x="190" y="735" class="label" font-size="20" fill="#168dd2">Compose</text>
+  <!-- Backend labels and logos -->
+  <text x="64" y="665" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#2f63b7">FIWARE</text>
+  <text x="205" y="665" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#4b5563">Docker</text>
+  <text x="205" y="693" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#168dd2">Compose</text>
+  <text x="597" y="744" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">1883</text>
+  <text x="514" y="536" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">4041</text>
+  <text x="553" y="323" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">1026</text>
+  <text x="814" y="323" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">8666</text>
+  <text x="1088" y="323" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">27017</text>
 
   <!-- Edge strip -->
-  <rect x="136" y="832" width="1110" height="102" rx="16" fill="#dff2d8" stroke="#70b764" stroke-width="3"/>
-  <g text-anchor="middle">
-    <g transform="translate(220 855)">
-      <text y="39" class="icon">&#8986;</text>
-      <text y="70" class="service-title" font-size="15">Wearable</text>
-      <text y="90" class="service-sub" font-size="12">CarePlus Token</text>
-    </g>
-    <g transform="translate(370 855)">
-      <text y="39" class="icon">&#128241;</text>
-      <text y="70" class="service-title" font-size="15">ESP32</text>
-      <text y="90" class="service-sub" font-size="12">Wokwi</text>
-    </g>
-    <g transform="translate(520 855)">
-      <text y="39" class="icon">&#9671;</text>
-      <text y="70" class="service-title" font-size="15">MPU6050</text>
-      <text y="90" class="service-sub" font-size="12">Acelerometro</text>
-    </g>
-    <g transform="translate(670 855)">
-      <text y="39" class="icon">&#9638;</text>
-      <text y="70" class="service-title" font-size="15">OLED</text>
-      <text y="90" class="service-sub" font-size="12">Feedback</text>
-    </g>
-    <g transform="translate(820 855)">
-      <text y="39" class="icon">&#9679;</text>
-      <text y="70" class="service-title" font-size="15">Botao</text>
-      <text y="90" class="service-sub" font-size="12">Validacao</text>
-    </g>
-    <g transform="translate(970 855)">
-      <text y="39" class="icon">&#11044;</text>
-      <text y="70" class="service-title" font-size="15">LEDs</text>
-      <text y="90" class="service-sub" font-size="12">Status</text>
-    </g>
-    <g transform="translate(1120 855)">
-      <text y="39" class="icon">&#128246;</text>
-      <text y="70" class="service-title" font-size="15">Wi-Fi</text>
-      <text y="90" class="service-sub" font-size="12">MQTT</text>
-    </g>
+  <rect x="166" y="790" width="1018" height="92" rx="16" fill="#dff2d8" stroke="#70b764" stroke-width="3"/>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" fill="#27313a">
+    <text x="266" y="831" font-size="38">&#9633;</text>
+    <text x="266" y="861" font-size="15" font-weight="700">ESP32</text>
+    <text x="266" y="878" font-size="12">Wokwi</text>
+    <text x="432" y="831" font-size="38">&#9671;</text>
+    <text x="432" y="861" font-size="15" font-weight="700">MPU6050</text>
+    <text x="432" y="878" font-size="12">steps</text>
+    <text x="598" y="831" font-size="38">&#9638;</text>
+    <text x="598" y="861" font-size="15" font-weight="700">OLED</text>
+    <text x="598" y="878" font-size="12">feedback</text>
+    <text x="764" y="831" font-size="38">&#9679;</text>
+    <text x="764" y="861" font-size="15" font-weight="700">Button</text>
+    <text x="764" y="878" font-size="12">validation</text>
+    <text x="930" y="831" font-size="38">&#9679;</text>
+    <text x="930" y="861" font-size="15" font-weight="700">LEDs</text>
+    <text x="930" y="878" font-size="12">status</text>
+    <text x="1096" y="831" font-size="38">&#9675;</text>
+    <text x="1096" y="861" font-size="15" font-weight="700">CarePlus</text>
+    <text x="1096" y="878" font-size="12">token001</text>
   </g>
-  <line x1="612" y1="832" x2="612" y2="826" stroke="#18784f" stroke-width="3"/>
-  <line x1="612" y1="826" x2="612" y2="675" stroke="#18784f" stroke-width="3" stroke-dasharray="9 6" marker-end="url(#arrowGreen)"/>
-  <text x="627" y="811" class="port">MQTT / 1883</text>
+
+  <!-- Protocol arrows -->
+  <line x1="538" y1="790" x2="538" y2="724" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+  <line x1="538" y1="718" x2="538" y2="636" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+  <line x1="538" y1="560" x2="538" y2="482" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+  <line x1="628" y1="432" x2="712" y2="432" stroke="#2d3748" stroke-width="3" stroke-dasharray="5 6" marker-end="url(#arrow)"/>
+  <line x1="892" y1="432" x2="974" y2="432" stroke="#2d3748" stroke-width="3" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+  <line x1="628" y1="624" x2="720" y2="624" stroke="#2d3748" stroke-width="3" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+  <line x1="538" y1="565" x2="538" y2="482" stroke="#2d3748" stroke-width="2" stroke-dasharray="4 8"/>
+  <line x1="720" y1="624" x2="628" y2="624" stroke="#2d3748" stroke-width="2" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+
+  <!-- App to backend lines -->
+  <line x1="237" y1="197" x2="237" y2="314" stroke="#7b3f98" stroke-width="3" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="237" y1="314" x2="452" y2="382" stroke="#7b3f98" stroke-width="3" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="432" y1="197" x2="432" y2="565" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="704" y1="197" x2="704" y2="336" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="704" y1="197" x2="790" y2="336" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+  <line x1="960" y1="197" x2="1064" y2="336" stroke="#7b3f98" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+
+  <!-- Port labels in application layer -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1f2933">
+    <text x="276" y="218">1026</text>
+    <text x="408" y="218">4041</text>
+    <text x="665" y="218">1026</text>
+    <text x="798" y="218">8666</text>
+    <text x="1088" y="218">27017</text>
+  </g>
 
   <!-- Legend -->
-  <g transform="translate(1038 706)">
-    <line x1="0" y1="0" x2="64" y2="0" stroke="#6f3c96" stroke-width="3" stroke-dasharray="4 6" marker-end="url(#arrowPurple)"/>
-    <text x="86" y="6" class="small" font-size="15" font-weight="700">NGSIv2 / HTTPS</text>
-    <line x1="0" y1="36" x2="64" y2="36" stroke="#18784f" stroke-width="3" stroke-dasharray="9 6" marker-end="url(#arrowGreen)"/>
-    <text x="86" y="42" class="small" font-size="15" font-weight="700">MQTT</text>
-    <line x1="0" y1="72" x2="64" y2="72" stroke="#3a4652" stroke-width="3" stroke-dasharray="2 10" marker-end="url(#arrowGray)"/>
-    <text x="86" y="78" class="small" font-size="15" font-weight="700">MongoDB</text>
+  <g transform="translate(1010 580)" font-family="Arial, Helvetica, sans-serif" fill="#1f2933">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#7b3f98" stroke-width="3" stroke-dasharray="4 5" marker-end="url(#arrowPurple)"/>
+    <text x="78" y="5" font-size="15" font-weight="700">NGSIv2 / HTTP</text>
+    <line x1="0" y1="42" x2="60" y2="42" stroke="#1d7c44" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#arrowGreen)"/>
+    <text x="78" y="47" font-size="15" font-weight="700">MQTT</text>
+    <line x1="0" y1="84" x2="60" y2="84" stroke="#2d3748" stroke-width="3" stroke-dasharray="3 10" marker-end="url(#arrow)"/>
+    <text x="78" y="89" font-size="15" font-weight="700">MongoDB</text>
   </g>
+
+  <!-- Data payload note -->
+  <rect x="70" y="260" width="305" height="125" rx="12" fill="#ffffff" stroke="#cad6e2" stroke-width="2"/>
+  <text x="92" y="292" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2933">CarePlusToken:token001</text>
+  <text x="92" y="322" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1f2933">Payload UltraLight MQTT:</text>
+  <text x="92" y="348" font-family="Consolas, monospace" font-size="13" fill="#374151">s|tracking|st|12|ps|12|tp|42</text>
+  <text x="92" y="370" font-family="Consolas, monospace" font-size="13" fill="#374151">b|99|al|moderate|ax|0.21...</text>
 </svg>
