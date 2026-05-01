@@ -11,7 +11,7 @@
 - [x] Manual de operacao
 - [x] `INTEGRANTES.txt` preenchido com nomes e RM
 - [x] Link publico do Wokwi conferido
-- [ ] Link publico do video de 3 min conferido
+- [x] Link publico do video de 3 min conferido
 - [x] Repositorio GitHub publico informado
 
 ## Validacao tecnica

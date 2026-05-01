@@ -126,4 +126,4 @@ https://github.com/fabiocabrini/fiware
 
 - Repositorio GitHub: https://github.com/pedrot-git/Sprint02-CarePlus
 - Simulacao Wokwi: https://wokwi.com/projects/462573727034430465
-- Video: preencher antes do envio no Microsoft Forms
+- Video: https://youtu.be/xNwy9vlqclw
