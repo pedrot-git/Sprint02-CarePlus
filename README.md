@@ -127,3 +127,9 @@ https://github.com/fabiocabrini/fiware
 - Repositorio GitHub: https://github.com/pedrot-git/Sprint02-CarePlus
 - Simulacao Wokwi: https://wokwi.com/projects/462573727034430465
 - Video: https://youtu.be/xNwy9vlqclw
+
+## Integrantes
+
+- RM567680 - Pedro Henrique Tavares Viana
+- RM567855 - David Ernesto Mogollon Gama
+- RM566949 - Roger De Carvalho Paiva
