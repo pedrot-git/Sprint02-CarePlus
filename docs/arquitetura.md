@@ -1,5 +1,7 @@
 # Arquitetura da Solucao
 
+![Arquitetura CarePlus Sprint 02](arquitetura-careplus-final.svg)
+
 ## Camadas
 
 ### Edge

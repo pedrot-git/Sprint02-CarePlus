@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitetura CarePlus Sprint 02</title>
+  <desc id="desc">Arquitetura em camadas do projeto CarePlus com Application, Back-end FIWARE e IoT.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#111"/>
+    </marker>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="4" dy="8" stdDeviation="6" flood-color="#444" flood-opacity="0.25"/>
+    </filter>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9deeff"/>
+      <stop offset="1" stop-color="#15aee8"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5bd8ff"/>
+      <stop offset="1" stop-color="#0683bd"/>
+    </linearGradient>
+    <style>
+      .font { font-family: Arial, Helvetica, sans-serif; }
+      .layer { font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 700; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 18px; fill: #111; }
+      .small { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #111; }
+      .port { font-family: Arial, Helvetica, sans-serif; font-size: 18px; fill: #111; }
+      .icon { fill: none; stroke: #555; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #111; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .ngsi { fill: none; stroke: #111; stroke-width: 3; stroke-dasharray: 3 6; marker-end: url(#arrow); }
+      .mqtt { fill: none; stroke: #111; stroke-width: 3; stroke-dasharray: 8 6; marker-end: url(#arrow); }
+      .mongo { fill: none; stroke: #111; stroke-width: 3; stroke-dasharray: 2 11; marker-end: url(#arrow); }
+    </style>
+    <g id="docker">
+      <polygon points="0,30 128,0 205,37 75,70" fill="url(#top)" stroke="#005d86" stroke-width="2"/>
+      <polygon points="75,70 205,37 205,132 75,170" fill="url(#front)" stroke="#005d86" stroke-width="2"/>
+      <polygon points="0,30 75,70 75,170 0,126" fill="#62d7f5" stroke="#005d86" stroke-width="2"/>
+      <path d="M112 65 h67 v86 h-67 z M126 72 v72 M142 70 v72 M158 68 v72" fill="none" stroke="#005d86" stroke-width="2"/>
+      <path d="M24 86 q28 24 63 0 q-28 48 -63 0z" fill="#087db5" opacity="0.55"/>
+      <rect x="34" y="61" width="13" height="13" fill="#087db5" opacity="0.65"/>
+      <rect x="49" y="61" width="13" height="13" fill="#087db5" opacity="0.65"/>
+      <rect x="64" y="61" width="13" height="13" fill="#087db5" opacity="0.65"/>
+      <rect x="49" y="46" width="13" height="13" fill="#087db5" opacity="0.65"/>
+      <rect x="64" y="46" width="13" height="13" fill="#087db5" opacity="0.65"/>
+    </g>
+  </defs>
+
+  <rect width="1254" height="1254" fill="#fff"/>
+
+  <rect x="16" y="16" width="1222" height="180" fill="#fff" stroke="#7f4b99" stroke-width="3"/>
+  <rect x="16" y="266" width="1222" height="675" fill="#fff" stroke="#3378c6" stroke-width="3"/>
+  <rect x="16" y="964" width="1222" height="264" fill="#fff" stroke="#3b9a36" stroke-width="3"/>
+
+  <text x="52" y="118" class="layer" fill="#a000c0">Application</text>
+  <text x="54" y="620" class="layer" fill="#0065c8">Back-end</text>
+  <text x="50" y="1076" class="layer" fill="#00866d">IoT</text>
+
+  <!-- Application -->
+  <g transform="translate(206 50)">
+    <rect width="166" height="136" rx="10" fill="#eef6ff" stroke="#0f4068" stroke-width="3"/>
+    <path d="M69 84 l49-49 M77 92 l-21 9 l9-21 M90 36 l29 29 M106 20 a15 15 0 1 1 21 21" class="icon"/>
+    <text x="83" y="122" text-anchor="middle" class="label">Postman</text>
+  </g>
+
+  <g transform="translate(470 50)">
+    <path d="M48 60 q-16-48 31-53 q25-35 59 1 q48 6 42 60" class="icon"/>
+    <rect x="83" y="51" width="42" height="52" class="icon"/>
+    <path d="M63 108 h39 M125 108 h41 M104 7 v44 M104 103 v28 M55 78 h28 M125 78 h42" class="icon"/>
+    <text x="105" y="122" text-anchor="middle" class="label">Postman Setup</text>
+  </g>
+
+  <g transform="translate(708 50)">
+    <rect x="0" y="0" width="116" height="72" class="icon"/>
+    <path d="M18 55 v-18 M36 55 v-32 M54 55 v-24 M75 18 a21 21 0 1 1 0 42 M75 18 v21 h21 M18 84 h80" class="icon"/>
+    <text x="58" y="122" text-anchor="middle" class="label">Dashboard Historico</text>
+  </g>
+
+  <g transform="translate(965 50)">
+    <rect x="0" y="0" width="108" height="75" rx="4" class="icon"/>
+    <path d="M28 38 l20-18 M28 38 l20 18 M80 20 l-20 18 M80 56 l-20-18 M22 92 h65" class="icon"/>
+    <text x="54" y="122" text-anchor="middle" class="label">Google Colab</text>
+  </g>
+
+  <!-- App arrows -->
+  <path d="M290 186 V386 H360" class="ngsi"/>
+  <text x="302" y="230" class="port">1026</text>
+  <path d="M520 186 V332" class="ngsi"/>
+  <text x="536" y="230" class="port">4041</text>
+  <path d="M766 186 V334" class="ngsi"/>
+  <text x="782" y="230" class="port">8666</text>
+  <path d="M1012 186 V252 H957 V286" class="ngsi"/>
+  <path d="M1012 252 H1076 V286" class="ngsi"/>
+  <text x="1028" y="230" class="port">1026 / 8666</text>
+
+  <!-- Backend boxes -->
+  <g transform="translate(360 340)" filter="url(#shadow)"><use href="#docker"/></g>
+  <text x="462" y="456" text-anchor="middle" class="label">Orion</text>
+
+  <g transform="translate(664 344)" filter="url(#shadow)"><use href="#docker"/></g>
+  <text x="766" y="456" text-anchor="middle" class="label">STH-Comet</text>
+
+  <g transform="translate(965 344)" filter="url(#shadow)"><use href="#docker"/></g>
+  <text x="1068" y="456" text-anchor="middle" class="label">MongoDB</text>
+  <text x="1068" y="480" text-anchor="middle" class="label">Historical</text>
+
+  <g transform="translate(386 572)" filter="url(#shadow)"><use href="#docker"/></g>
+  <text x="488" y="690" text-anchor="middle" class="label">IoT Agent</text>
+  <text x="488" y="714" text-anchor="middle" class="label">MQTT</text>
+
+  <g transform="translate(672 574)" filter="url(#shadow)"><use href="#docker"/></g>
+  <text x="775" y="690" text-anchor="middle" class="label">MongoDB</text>
+  <text x="775" y="714" text-anchor="middle" class="label">Internal</text>
+
+  <g transform="translate(404 785)" filter="url(#shadow)"><use href="#docker"/></g>
+  <text x="609" y="875" class="label">MQTT</text>
+  <text x="609" y="899" class="label">Broker</text>
+  <text x="515" y="924" class="port">1883</text>
+
+  <!-- Backend arrows -->
+  <path d="M565 389 H664" class="ngsi"/>
+  <path d="M869 389 H965" class="mongo"/>
+  <path d="M488 535 V572" class="ngsi"/>
+  <text x="392" y="508" class="port">1026</text>
+  <text x="514" y="508" class="port">NGSIv2 / 1026</text>
+  <text x="506" y="557" class="port">4041</text>
+  <path d="M591 624 H672" class="mongo"/>
+  <path d="M488 785 V742" class="mqtt"/>
+
+  <!-- Logos and badges -->
+  <text x="58" y="878" class="font" font-size="29" font-weight="700" fill="#1b4f98">FIWARE</text>
+  <text x="268" y="878" class="font" font-size="29" font-weight="700" fill="#4b5563">docker</text>
+  <text x="268" y="904" class="font" font-size="17" fill="#168bd0">Compose</text>
+  <circle cx="386" cy="311" r="19" fill="#edf8ff" stroke="#246aa8" stroke-width="2"/>
+  <path d="M374 312 q14 14 29 0 M386 295 v31 M368 310 h36" fill="none" stroke="#246aa8" stroke-width="3"/>
+  <circle cx="690" cy="311" r="19" fill="#edf8ff" stroke="#246aa8" stroke-width="2"/>
+  <path d="M678 312 q14 14 29 0 M690 295 v31 M672 310 h36" fill="none" stroke="#246aa8" stroke-width="3"/>
+  <rect x="977" y="298" width="20" height="28" rx="3" fill="none" stroke="#1683f2" stroke-width="3"/>
+  <path d="M973 326 h28 M978 298 q0-18 9-18 q9 0 9 18" fill="none" stroke="#1683f2" stroke-width="3"/>
+  <path d="M1110 290 c28 15 24 55-6 76 c5-33-2-53 6-76z" fill="#33a64b"/>
+  <path d="M565 742 q21-28 43 0 M574 752 q12-16 25 0 M583 762 q5-8 11 0" fill="none" stroke="#3159a4" stroke-width="4"/>
+  <text x="571" y="782" class="small" fill="#3159a4">mosquitto</text>
+
+  <!-- Legend -->
+  <g transform="translate(1008 748)">
+    <path d="M0 0 L72 0" class="ngsi"/>
+    <text x="102" y="6" class="label">NGSIv2</text>
+    <path d="M0 48 L72 48" class="mqtt"/>
+    <text x="102" y="54" class="label">MQTT</text>
+    <path d="M0 96 L72 96" class="mongo"/>
+    <text x="102" y="102" class="label">MongoDB</text>
+  </g>
+
+  <!-- IoT -->
+  <path d="M488 1008 V910" class="mqtt"/>
+  <rect x="152" y="1008" width="974" height="142" rx="12" fill="#f2fff0" stroke="#4aa33c" stroke-width="2.5"/>
+  <path d="M238 996 q18-22 37 0 M247 1006 q9-12 19 0" class="thin" stroke="#666"/>
+
+  <g transform="translate(226 1024)">
+    <rect x="-24" y="0" width="48" height="74" rx="4" class="icon"/>
+    <path d="M-12 12 h24 M-12 25 h24 M-12 38 h24 M-12 51 h24 M0 0 v74" class="icon"/>
+    <text x="0" y="102" text-anchor="middle" class="label">ESP32</text>
+  </g>
+  <g transform="translate(404 1024)">
+    <rect x="-36" y="0" width="72" height="72" rx="6" class="icon"/>
+    <path d="M0 10 v50 M-24 54 L0 36 L24 54 M-24 16 l10 10 M24 16 l-10 10" class="icon"/>
+    <text x="0" y="102" text-anchor="middle" class="label">MPU6050</text>
+  </g>
+  <g transform="translate(560 1024)">
+    <rect x="-42" y="8" width="84" height="56" rx="4" class="icon"/>
+    <rect x="-24" y="20" width="48" height="28" class="icon"/>
+    <text x="0" y="96" text-anchor="middle" class="label">OLED</text>
+    <text x="0" y="120" text-anchor="middle" class="label">SSD1306</text>
+  </g>
+  <g transform="translate(720 1024)">
+    <path d="M-38 50 h76 l-18 22 h-40z" class="icon"/>
+    <ellipse cx="0" cy="28" rx="35" ry="22" class="icon"/>
+    <text x="0" y="102" text-anchor="middle" class="label">Push Button</text>
+  </g>
+  <g transform="translate(890 1024)">
+    <path d="M0 0 v72 M-24 40 h48 M-12 72 h24 M-18 20 q18-38 36 0" class="icon"/>
+    <path d="M-20 -10 v-16 M0 -10 v-18 M20 -10 v-16" class="icon"/>
+    <text x="0" y="102" text-anchor="middle" class="label">Green LED</text>
+  </g>
+  <g transform="translate(1044 1024)">
+    <path d="M0 0 v72 M-24 40 h48 M-12 72 h24 M-18 20 q18-38 36 0" class="icon"/>
+    <path d="M-20 -10 v-16 M0 -10 v-18 M20 -10 v-16" class="icon"/>
+    <text x="0" y="102" text-anchor="middle" class="label">Red LED</text>
+  </g>
+
+  <text x="456" y="1185" class="font" font-size="24" font-weight="700" fill="#18a832">CarePlus</text>
+  <text x="560" y="1185" class="font" font-size="22" fill="#111">Token / token001</text>
+  <text x="432" y="1214" class="font" font-size="20" font-weight="700" fill="#111">MQTT Topic:</text>
+  <text x="555" y="1214" class="font" font-size="20" fill="#111">/TEF/token001/attrs</text>
+</svg>
