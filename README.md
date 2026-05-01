@@ -17,7 +17,7 @@ O prototipo usa um ESP32 simulado no Wokwi com:
 
 ## Arquitetura
 
-![Arquitetura CarePlus Sprint 02](docs/arquitetura-careplus-v2.svg)
+![Arquitetura CarePlus Sprint 02](https://raw.githubusercontent.com/pedrot-git/Sprint02-CarePlus/main/docs/arquitetura-careplus-v2.svg?v=20260501-final)
 
 ```mermaid
 flowchart LR
@@ -235,5 +235,4 @@ https://github.com/fabiocabrini/fiware
 - RM567680 - Pedro Henrique Tavares Viana
 - RM567855 - David Ernesto Mogollon Gama
 - RM566949 - Roger De Carvalho Paiva
-
 
