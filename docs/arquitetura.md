@@ -24,8 +24,6 @@ O Postman e usado para provisionamento, diagnostico e consulta. O Google Colab c
 
 ## Diagrama
 
-![Arquitetura CarePlus Sprint 02](arquitetura-careplus-v2.svg)
-
 ```mermaid
 flowchart TD
     U["Beneficiario CarePlus"] --> W["Wearable/Token ESP32"]
@@ -45,4 +43,3 @@ Entidade principal: `CarePlusToken:token001`
 Tipo: `CarePlusToken`
 
 Atributos principais: `steps`, `pendingSteps`, `tokenValue`, `totalPoints`, `batteryLevel`, `activityLevel`, `accelX`, `accelY`, `accelZ`.
-
