@@ -1,4 +1,4 @@
-﻿# Manual de Operacao
+# Manual de Operação
 
 ## 1. Preparar FIWARE
 
@@ -33,7 +33,9 @@ A collection Postman possui health checks para:
 - IoT Agent: `http://00.000.0.000:4041/version`
 - STH-Comet: `http://00.000.0.000:8666/version`
 
-Substitua `00.000.0.000` pelo IP publico da VM FIWARE antes de rodar a collection, o Wokwi ou o dashboard Colab.
+Substitua `00.000.0.000` pelo IP público da VM FIWARE antes de rodar a collection, o Wokwi ou o dashboard Colab.
+
+Resultado esperado: Orion, IoT Agent e STH-Comet devem responder `200 OK` ou retornar informações de versão/status.
 
 ## 2. Provisionar IoT Agent
 
@@ -42,7 +44,9 @@ No Postman, importe a collection e execute:
 1. `0. Diagnostico da VM`
 2. `2. Setup IoT Agent + Device`
 
-Se algum POST retornar `409`, significa que o recurso provavelmente ja existe. Nesse caso, consulte os itens de listagem antes de apagar algo.
+Essa etapa cria o IoT Service e o device mapping `token001`. A entidade `CarePlusToken:token001` aparece/atualiza no Orion depois que o ESP32 envia a primeira telemetria MQTT válida.
+
+Resultado esperado: o IoT Agent deve listar o device `token001`. Se algum POST retornar `409`, significa que o recurso provavelmente já existe. Nesse caso, consulte os itens de listagem antes de apagar algo.
 
 ## 3. Rodar Wokwi
 
@@ -56,7 +60,9 @@ const int mqttPort = 1883;
 const char* mqttTopic = "/TEF/token001/attrs";
 ```
 
-Ao iniciar, o Serial Monitor deve mostrar conexao Wi-Fi, conexao MQTT e publicacao de payload UltraLight.
+Ao iniciar, o Serial Monitor deve mostrar conexão Wi-Fi, conexão MQTT e publicação de payload UltraLight.
+
+Resultado esperado: mensagens de telemetria publicadas no tópico `/TEF/token001/attrs`.
 
 ## 4. Consultar estado atual
 
@@ -64,9 +70,9 @@ No Postman, execute:
 
 - `4. Consultas Orion - Estado Atual/Get Entity - keyValues`
 
-O retorno esperado e a entidade `CarePlusToken:token001` com os atributos de passos, pontos, bateria, RSSI e acelerometro.
+Resultado esperado: a entidade `CarePlusToken:token001` deve retornar atributos como passos, pontos, bateria, RSSI e acelerômetro.
 
-## 5. Persistir historico
+## 5. Persistir histórico
 
 Execute:
 
@@ -76,23 +82,27 @@ Depois rode o Wokwi por mais tempo e consulte a pasta:
 
 - `6. STH-Comet - Historico por atributo`
 
+Resultado esperado: o STH-Comet deve retornar séries históricas dos atributos consultados.
+
 ## 6. Dashboard Colab
 
-Abra o Google Colab, cole o conteudo de `dashboard_colab/careplus_sprint02_colab.py` e execute. O notebook consulta o estado atual no Orion e o historico no STH-Comet.
+Abra o Google Colab, cole o conteúdo de `dashboard_colab/careplus_sprint02_colab.py` e execute. O notebook consulta o estado atual no Orion e o histórico no STH-Comet.
 
-## 7. Solucao de problemas
+Resultado esperado: tabela com o estado atual da entidade e gráficos com passos, pontos, bateria e aceleração.
+
+## 7. Solução de problemas
 
 Se o Orion retornar `404` para a entidade:
 
 - Confirme se o device `token001` existe no IoT Agent.
-- Confirme se o topico MQTT e exatamente `/TEF/token001/attrs`.
+- Confirme se o tópico MQTT é exatamente `/TEF/token001/attrs`.
 - Confirme se o payload usa os object IDs `s`, `p`, `st`, `ps`, `v`, `tp`, `b`, `r`, `al`, `ax`, `ay`, `az`.
-- Confirme se os headers `fiware-service=openiot` e `fiware-servicepath=/` estao no Postman.
+- Confirme se os headers `fiware-service=openiot` e `fiware-servicepath=/` estão no Postman.
 
-Se a VM nao responder:
+Se a VM não responder:
 
-- Verifique se a VM esta ligada.
-- Verifique se os containers Docker estao rodando.
+- Verifique se a VM está ligada.
+- Verifique se os containers Docker estão rodando.
 - Verifique firewall/regras de rede para as portas `1026`, `4041`, `8666` e `1883`.
 
 Para encerrar a stack:
@@ -102,7 +112,13 @@ cd fiware
 sudo docker-compose down
 ```
 
-Para reset completo, remova os volumes somente se quiser apagar entidades, subscriptions e historico:
+Para reset completo, confira os volumes antes de remover:
+
+```bash
+sudo docker volume ls
+```
+
+Remova os volumes somente se quiser apagar entidades, subscriptions e histórico. Os nomes podem variar conforme o diretório/projeto usado pelo Docker Compose:
 
 ```bash
 sudo docker volume rm fiware_mongo-historical-data
