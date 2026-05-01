@@ -309,16 +309,6 @@ sudo docker volume rm fiware_mongo-historical-data
 sudo docker volume rm fiware_mongo-internal-data
 ```
 
-## Evidências esperadas
-
-- Print do Wokwi executando com OLED, botão, LEDs e MPU6050.
-- Print do Serial Monitor mostrando MQTT conectado e payload publicado.
-- Print do Postman com `Get Entity - keyValues` retornando a entidade.
-- Print do STH-Comet retornando histórico.
-- Print do dashboard Colab com tabela e gráficos.
-- Link público da simulação Wokwi.
-- Link público do vídeo de até 3 minutos.
-
 ## Resultados esperados
 
 - ESP32 simulado no Wokwi conectado ao Wi-Fi e ao broker MQTT.
@@ -328,14 +318,6 @@ sudo docker volume rm fiware_mongo-internal-data
 - Atributos `steps`, `pendingSteps`, `totalPoints`, `batteryLevel`, `accelX`, `accelY` e `accelZ` visíveis no Orion.
 - Histórico persistido no STH-Comet após criação da subscription.
 - Dashboard Colab exibindo tabela e gráficos.
-
-## Limitações conhecidas
-
-- A Sprint 02 usa simulação digital no Wokwi, não hardware físico.
-- O dashboard atual é feito em Google Colab, não em uma aplicação web completa.
-- A regra de pontuação está no firmware do ESP32; em uma arquitetura final, ela pode ser migrada para uma camada de back-end.
-- O IP da VM não é fixado no README por segurança e deve ser configurado antes da execução.
-- A persistência histórica depende da subscription do Orion para o STH-Comet estar criada corretamente.
 
 ## Próximas melhorias
 
