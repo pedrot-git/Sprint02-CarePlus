@@ -1,0 +1,929 @@
+{
+  "info": {
+    "name": "CarePlus Sprint 02 - FIWARE MQTT Token001 - Completo",
+    "description": "Collection revisada para a VM baseada no tutorial FIWARE do professor, com foco em MQTT.\n\nFluxo correto:\n1) Rode os health checks.\n2) Crie o IoT Service.\n3) Crie o device token001.\n4) Rode o Wokwi publicando MQTT em /TEF/token001/attrs.\n5) Consulte Orion em Get Entity - keyValues.\n6) Crie a subscription STH-Comet.\n7) Rode o Wokwi por mais tempo e consulte o histórico.\n\nImportante: a pasta antiga 'Simular Telemetria sem Wokwi' via HTTP na porta 7896 foi removida, porque nesta VM o caminho principal é MQTT pela porta 1883. O Postman aqui fica para provisionar, diagnosticar, consultar Orion e consultar STH-Comet.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "url",
+      "value": "35.198.7.130",
+      "type": "string"
+    },
+    {
+      "key": "service",
+      "value": "openiot",
+      "type": "string"
+    },
+    {
+      "key": "servicepath",
+      "value": "/",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "TEF",
+      "type": "string"
+    },
+    {
+      "key": "deviceId",
+      "value": "token001",
+      "type": "string"
+    },
+    {
+      "key": "entityId",
+      "value": "CarePlusToken:token001",
+      "type": "string"
+    },
+    {
+      "key": "entityType",
+      "value": "CarePlusToken",
+      "type": "string"
+    },
+    {
+      "key": "subscriptionId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Diagnostico da VM",
+      "description": "Use primeiro. Se esses endpoints não responderem, o problema é VM, IP, Docker ou portas.",
+      "item": [
+        {
+          "name": "Orion - version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://{{url}}:1026/version",
+            "description": "Esperado: 200 OK. Confirma Orion Context Broker online."
+          }
+        },
+        {
+          "name": "IoT Agent - version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://{{url}}:4041/version",
+            "description": "Esperado: 200 OK. Confirma IoT Agent online."
+          }
+        },
+        {
+          "name": "STH-Comet - version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://{{url}}:8666/version",
+            "description": "Esperado: 200 OK. Confirma STH-Comet online."
+          }
+        },
+        {
+          "name": "Orion - list all entities keyValues",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities?options=keyValues&limit=100",
+            "description": "Diagnóstico geral. Mostra todas as entidades visíveis com o service/servicepath atuais."
+          }
+        },
+        {
+          "name": "IoT Agent - list services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/services",
+            "description": "Diagnóstico do serviço IoT Agent. Confirme apikey TEF e resource /iot/d."
+          }
+        },
+        {
+          "name": "IoT Agent - list devices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/devices",
+            "description": "Diagnóstico de devices. Confirme se token001 existe."
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Reset opcional",
+      "description": "Use apenas quando quiser limpar e recomeçar. 404 em DELETE pode ser normal quando o item já não existe.",
+      "item": [
+        {
+          "name": "Delete Orion Entity",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities/{{entityId}}",
+            "description": "Pode retornar 204 se apagou ou 404 se a entidade ainda não existia."
+          }
+        },
+        {
+          "name": "Delete IoT Device token001",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/devices/{{deviceId}}",
+            "description": "Pode retornar 204 se apagou ou 404 se o device ainda não existia."
+          }
+        },
+        {
+          "name": "List Subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/subscriptions",
+            "description": "Use para copiar o id da subscription antiga, se quiser apagar manualmente."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try {",
+                  "  const subs = pm.response.json();",
+                  "  const sub = subs.find(s => s.description === \"CarePlus token001 telemetry to STH-Comet\");",
+                  "  if (sub && sub.id) {",
+                  "    pm.collectionVariables.set(\"subscriptionId\", sub.id);",
+                  "    console.log(\"subscriptionId salvo:\", sub.id);",
+                  "  }",
+                  "} catch (e) {",
+                  "  console.log(\"Não foi possível ler subscriptions:\", e);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Subscription by variable",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/subscriptions/{{subscriptionId}}",
+            "description": "Antes rode List Subscriptions para preencher subscriptionId. Pode retornar 204 ou 404."
+          }
+        },
+        {
+          "name": "Delete IoT Service TEF",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/services?resource=/iot/d&apikey={{apiKey}}",
+            "description": "Apaga o IoT Service. Use só em reset completo."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Setup IoT Agent + Device",
+      "description": "Crie primeiro o IoT Service, depois o device token001. Se retornar 409, provavelmente já existe.",
+      "item": [
+        {
+          "name": "Create IoT Service MQTT TEF",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/services",
+            "description": "Cria o serviço UltraLight/MQTT com apiKey TEF e resource /iot/d.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"services\": [\n    {\n      \"apikey\": \"{{apiKey}}\",\n      \"cbroker\": \"http://orion:1026\",\n      \"entity_type\": \"{{entityType}}\",\n      \"resource\": \"/iot/d\"\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "List IoT Services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/services",
+            "description": "Confirme se aparece apikey TEF, cbroker http://orion:1026, entity_type CarePlusToken e resource /iot/d."
+          }
+        },
+        {
+          "name": "Create Device token001",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/devices",
+            "description": "Provisiona token001 como entidade CarePlusToken:token001 e mapeia os object_ids do payload UltraLight do Wokwi.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"devices\": [\n    {\n      \"device_id\": \"{{deviceId}}\",\n      \"entity_name\": \"{{entityId}}\",\n      \"entity_type\": \"{{entityType}}\",\n      \"protocol\": \"PDI-IoTA-UltraLight\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"America/Sao_Paulo\",\n      \"attributes\": [\n        {\n          \"object_id\": \"s\",\n          \"name\": \"state\",\n          \"type\": \"Text\"\n        },\n        {\n          \"object_id\": \"p\",\n          \"name\": \"pressCount\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"st\",\n          \"name\": \"steps\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"ps\",\n          \"name\": \"pendingSteps\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"v\",\n          \"name\": \"tokenValue\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"tp\",\n          \"name\": \"totalPoints\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"b\",\n          \"name\": \"batteryLevel\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"r\",\n          \"name\": \"rssi\",\n          \"type\": \"Integer\"\n        },\n        {\n          \"object_id\": \"al\",\n          \"name\": \"activityLevel\",\n          \"type\": \"Text\"\n        },\n        {\n          \"object_id\": \"ax\",\n          \"name\": \"accelX\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"ay\",\n          \"name\": \"accelY\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"az\",\n          \"name\": \"accelZ\",\n          \"type\": \"Number\"\n        }\n      ]\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Device token001",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/devices/{{deviceId}}",
+            "description": "Esperado: device_id token001, entity_name CarePlusToken:token001 e transport MQTT."
+          }
+        },
+        {
+          "name": "List IoT Devices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/devices",
+            "description": "Lista todos os devices do service/servicepath atual."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Publicacao MQTT pelo Wokwi",
+      "description": "Esta pasta não publica MQTT pelo Postman. Ela serve como checklist do que o Wokwi deve fazer.\nNo seu sketch, o ESP32 deve publicar no broker {{url}}:1883 e no tópico /TEF/token001/attrs.\nPayload esperado no Serial Monitor: s|tracking|p|0|st|...|ps|...|v|...|tp|...|b|...|r|...|al|...|ax|...|ay|...|az|...\nDepois que o Wokwi publicar uma telemetria válida, a entidade deve aparecer no Orion.",
+      "item": [
+        {
+          "name": "Checklist - antes de abrir Orion",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://{{url}}:1026/version",
+            "description": "Checklist manual:\n1) Wokwi conectado ao Wi-Fi.\n2) MQTT conectado.\n3) Serial Monitor mostrando 'telemetria publicada com sucesso'.\n4) Tópico usado: /TEF/token001/attrs.\n5) Payload usa object_ids s, p, st, ps, v, tp, b, r, al, ax, ay, az."
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Consultas Orion - Estado Atual",
+      "description": "Use depois que o Wokwi publicar pelo menos uma telemetria MQTT válida.",
+      "item": [
+        {
+          "name": "Get Entity - keyValues",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities/{{entityId}}?options=keyValues",
+            "description": "Se retornar 404, a entidade ainda não recebeu telemetria válida ou service/servicepath/entityId estão diferentes."
+          }
+        },
+        {
+          "name": "Get Entity - full NGSI",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities/{{entityId}}",
+            "description": "Mostra atributos com type, value e metadata."
+          }
+        },
+        {
+          "name": "Get All CarePlusToken Entities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities?type={{entityType}}&options=keyValues",
+            "description": "Use para confirmar se a entidade foi criada com o tipo CarePlusToken."
+          }
+        },
+        {
+          "name": "Get All Entities - debug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities?options=keyValues&limit=100",
+            "description": "Use quando Get Entity der 404. Ajuda a ver se a entidade apareceu com outro id/tipo."
+          }
+        },
+        {
+          "name": "Get totalPoints value",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities/{{entityId}}/attrs/totalPoints/value",
+            "description": "Consulta direta do valor de totalPoints."
+          }
+        },
+        {
+          "name": "Get steps value",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities/{{entityId}}/attrs/steps/value",
+            "description": "Consulta direta do valor de steps."
+          }
+        },
+        {
+          "name": "Get batteryLevel value",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities/{{entityId}}/attrs/batteryLevel/value",
+            "description": "Consulta direta do valor de batteryLevel."
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. STH-Comet - Subscription",
+      "description": "Crie a subscription depois que a entidade já existir no Orion. Depois rode o Wokwi por mais tempo para gerar histórico.",
+      "item": [
+        {
+          "name": "Create Subscription to STH-Comet",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/subscriptions",
+            "description": "Cria assinatura para persistir os atributos no STH-Comet. Resposta esperada: 201 Created.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"CarePlus token001 telemetry to STH-Comet\",\n  \"subject\": {\n    \"entities\": [\n      {\n        \"id\": \"{{entityId}}\",\n        \"type\": \"{{entityType}}\"\n      }\n    ],\n    \"condition\": {\n      \"attrs\": [\n        \"state\",\n        \"pressCount\",\n        \"steps\",\n        \"pendingSteps\",\n        \"tokenValue\",\n        \"totalPoints\",\n        \"batteryLevel\",\n        \"rssi\",\n        \"activityLevel\",\n        \"accelX\",\n        \"accelY\",\n        \"accelZ\"\n      ]\n    }\n  },\n  \"notification\": {\n    \"http\": {\n      \"url\": \"http://sth-comet:8666/notify\"\n    },\n    \"attrsFormat\": \"legacy\",\n    \"attrs\": [\n      \"state\",\n      \"pressCount\",\n      \"steps\",\n      \"pendingSteps\",\n      \"tokenValue\",\n      \"totalPoints\",\n      \"batteryLevel\",\n      \"rssi\",\n      \"activityLevel\",\n      \"accelX\",\n      \"accelY\",\n      \"accelZ\"\n    ]\n  },\n  \"throttling\": 1\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const locationHeader = pm.response.headers.get(\"Location\") || \"\";",
+                  "const match = locationHeader.match(/\\/v2\\/subscriptions\\/([^\\/]+)/);",
+                  "if (match && match[1]) {",
+                  "  pm.collectionVariables.set(\"subscriptionId\", match[1]);",
+                  "  console.log(\"subscriptionId salvo:\", match[1]);",
+                  "}",
+                  "pm.test(\"Subscription criada ou já existente\", function () {",
+                  "  pm.expect([201, 409]).to.include(pm.response.code);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "List Subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/subscriptions",
+            "description": "Confirme se existe uma subscription com descrição CarePlus token001 telemetry to STH-Comet."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try {",
+                  "  const subs = pm.response.json();",
+                  "  const sub = subs.find(s => s.description === \"CarePlus token001 telemetry to STH-Comet\");",
+                  "  if (sub && sub.id) {",
+                  "    pm.collectionVariables.set(\"subscriptionId\", sub.id);",
+                  "    console.log(\"subscriptionId salvo:\", sub.id);",
+                  "  }",
+                  "} catch (e) {",
+                  "  console.log(\"Não foi possível ler subscriptions:\", e);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Subscription by variable",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/subscriptions/{{subscriptionId}}",
+            "description": "Use se precisar recriar a subscription. Rode List Subscriptions antes para salvar o subscriptionId."
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. STH-Comet - Historico por atributo",
+      "description": "Consultas do histórico usado pelo Colab/dashboard. Use depois da subscription e depois de gerar novas telemetrias no Wokwi.",
+      "item": [
+        {
+          "name": "STH state lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/state?lastN=100",
+            "description": "Histórico do atributo state. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH pressCount lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/pressCount?lastN=100",
+            "description": "Histórico do atributo pressCount. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH steps lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/steps?lastN=100",
+            "description": "Histórico do atributo steps. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH pendingSteps lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/pendingSteps?lastN=100",
+            "description": "Histórico do atributo pendingSteps. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH tokenValue lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/tokenValue?lastN=100",
+            "description": "Histórico do atributo tokenValue. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH totalPoints lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/totalPoints?lastN=100",
+            "description": "Histórico do atributo totalPoints. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH batteryLevel lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/batteryLevel?lastN=100",
+            "description": "Histórico do atributo batteryLevel. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH rssi lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/rssi?lastN=100",
+            "description": "Histórico do atributo rssi. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH activityLevel lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/activityLevel?lastN=100",
+            "description": "Histórico do atributo activityLevel. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH accelX lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/accelX?lastN=100",
+            "description": "Histórico do atributo accelX. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH accelY lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/accelY?lastN=100",
+            "description": "Histórico do atributo accelY. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        },
+        {
+          "name": "STH accelZ lastN 100",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/accelZ?lastN=100",
+            "description": "Histórico do atributo accelZ. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Diagnostico de erro 404",
+      "description": "Use esta pasta quando Get Entity - keyValues retornar 404.",
+      "item": [
+        {
+          "name": "404 - Passo 1 - List IoT Services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/services",
+            "description": "Confirme service=openiot, servicepath=/, apikey=TEF, resource=/iot/d."
+          }
+        },
+        {
+          "name": "404 - Passo 2 - Get Device token001",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:4041/iot/devices/{{deviceId}}",
+            "description": "Se der 404 aqui, o device não foi provisionado no IoT Agent."
+          }
+        },
+        {
+          "name": "404 - Passo 3 - List All Entities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities?options=keyValues&limit=100",
+            "description": "Se estiver vazio, nenhuma telemetria chegou ao Orion com esses headers."
+          }
+        },
+        {
+          "name": "404 - Passo 4 - List CarePlusToken Entities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "fiware-service",
+                "value": "{{service}}"
+              },
+              {
+                "key": "fiware-servicepath",
+                "value": "{{servicepath}}"
+              }
+            ],
+            "url": "http://{{url}}:1026/v2/entities?type={{entityType}}&options=keyValues",
+            "description": "Se vazio, a entidade não existe com type CarePlusToken."
+          }
+        },
+        {
+          "name": "404 - Passo 5 - Orion version sem headers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://{{url}}:1026/version",
+            "description": "Se falhar, o problema é conexão com a VM/IP/porta 1026, não entityId."
+          }
+        }
+      ]
+    }
+  ]
+}

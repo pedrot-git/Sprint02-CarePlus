@@ -1,0 +1,15 @@
+Preencha antes de enviar:
+
+Link publico do repositorio GitHub:
+https://github.com/pedrot-git/Sprint02-CarePlus
+
+Link publico da simulacao Wokwi:
+https://wokwi.com/projects/462573727034430465
+
+Link publico do video de ate 3 minutos:
+
+Observacoes para a apresentacao:
+- Mostrar o ESP32 publicando MQTT no topico /TEF/token001/attrs.
+- Mostrar a entidade CarePlusToken:token001 no Orion.
+- Mostrar historico no STH-Comet.
+- Mostrar o dashboard Colab com tabela e graficos.
