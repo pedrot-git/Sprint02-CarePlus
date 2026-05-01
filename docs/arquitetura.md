@@ -22,20 +22,6 @@ O Orion envia notificacoes para o STH-Comet por meio de uma subscription. O STH-
 
 O Postman e usado para provisionamento, diagnostico e consulta. O Google Colab consulta Orion/STH-Comet e gera tabelas e graficos de acompanhamento.
 
-## Diagrama
-
-```mermaid
-flowchart TD
-    U["Beneficiario CarePlus"] --> W["Wearable/Token ESP32"]
-    W --> S["Sensores: MPU6050, botao, OLED e LEDs"]
-    W --> M["MQTT Mosquitto"]
-    M --> I["IoT Agent MQTT UltraLight"]
-    I --> O["Orion Context Broker"]
-    O --> H["STH-Comet"]
-    O --> P["Postman"]
-    H --> C["Dashboard Google Colab"]
-```
-
 ## Dados da entidade
 
 Entidade principal: `CarePlusToken:token001`

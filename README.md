@@ -17,15 +17,7 @@ O prototipo usa um ESP32 simulado no Wokwi com:
 
 ## Arquitetura
 
-```mermaid
-flowchart LR
-    A["ESP32 no Wokwi"] --> B["Broker MQTT Mosquitto :1883"]
-    B --> C["IoT Agent MQTT / UltraLight :4041"]
-    C --> D["Orion Context Broker :1026"]
-    D --> E["STH-Comet :8666"]
-    D --> F["Postman - consultas NGSIv2"]
-    E --> G["Google Colab - dashboard historico"]
-```
+O projeto esta organizado em tres camadas: Edge/IoT, Back-end FIWARE e Application. O ESP32 simulado no Wokwi publica telemetria via MQTT para o broker Mosquitto. O IoT Agent MQTT interpreta o payload UltraLight e atualiza a entidade no Orion Context Broker. O Orion mantem o estado atual e envia notificacoes para o STH-Comet, que persiste o historico. O Postman e usado para provisionamento/consultas e o Google Colab para visualizacao dos dados.
 
 ## Estrutura da pasta
 
