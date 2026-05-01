@@ -1,4 +1,4 @@
-﻿# CarePlus - Sprint 02 - Edge Computing & Computer Systems
+# CarePlus - Sprint 02 - Edge Computing & Computer Systems
 
 Projeto da Sprint 02 do Challenge Care Plus: prototipo IoT de um token/wearable gamificado para acompanhar passos, validar missoes em um totem e enviar telemetria para FIWARE via MQTT.
 
@@ -17,7 +17,7 @@ O prototipo usa um ESP32 simulado no Wokwi com:
 
 ## Arquitetura
 
-![Arquitetura CarePlus Sprint 02](docs/arquitetura-careplus.svg)
+![Arquitetura CarePlus Sprint 02](docs/arquitetura-careplus-v2.svg)
 
 ```mermaid
 flowchart LR
@@ -37,7 +37,7 @@ CarePlus_Sprint02_Entrega/
   INTEGRANTES.txt
   CHECKLIST_ENTREGA.md
   docs/
-    arquitetura-careplus.svg
+    arquitetura-careplus-v2.svg
     arquitetura.md
     manual_operacao.md
     Challenge Care Plus - Sprints 2 e 3.pdf
@@ -235,4 +235,5 @@ https://github.com/fabiocabrini/fiware
 - RM567680 - Pedro Henrique Tavares Viana
 - RM567855 - David Ernesto Mogollon Gama
 - RM566949 - Roger De Carvalho Paiva
+
 
