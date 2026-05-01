@@ -1,4 +1,4 @@
-# Checklist da Entrega - Sprint 02
+﻿# Checklist da Entrega - Sprint 02
 
 ## Arquivos
 
@@ -17,10 +17,10 @@
 ## Validacao tecnica
 
 - [ ] VM FIWARE ligada
-- [ ] Orion responde em `http://35.198.7.130:1026/version`
-- [ ] IoT Agent responde em `http://35.198.7.130:4041/version`
-- [ ] STH-Comet responde em `http://35.198.7.130:8666/version`
-- [ ] MQTT acessivel em `35.198.7.130:1883`
+- [ ] Orion responde em `http://00.000.0.000:1026/version`
+- [ ] IoT Agent responde em `http://00.000.0.000:4041/version`
+- [ ] STH-Comet responde em `http://00.000.0.000:8666/version`
+- [ ] MQTT acessivel em `00.000.0.000:1883`
 - [ ] IoT Service criado com `apikey=TEF`
 - [ ] Device `token001` criado
 - [ ] Wokwi publica em `/TEF/token001/attrs`
@@ -31,4 +31,5 @@
 
 ## Observacao importante
 
-Na ultima verificacao local, as portas da VM `35.198.7.130` nao responderam. Antes da apresentacao, ligue a VM/suba os containers e rode os health checks da collection.
+Antes da apresentacao, substitua `00.000.0.000` pelo IP publico da VM, ligue a VM/suba os containers e rode os health checks da collection.
+

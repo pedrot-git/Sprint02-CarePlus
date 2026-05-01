@@ -1,4 +1,4 @@
-# CarePlus - Sprint 02 - Edge Computing & Computer Systems
+﻿# CarePlus - Sprint 02 - Edge Computing & Computer Systems
 
 Projeto da Sprint 02 do Challenge Care Plus: prototipo IoT de um token/wearable gamificado para acompanhar passos, validar missoes em um totem e enviar telemetria para FIWARE via MQTT.
 
@@ -58,11 +58,11 @@ Valores usados no projeto:
 
 | Item | Valor |
 |---|---|
-| IP da VM | `35.198.7.130` |
-| Orion | `http://35.198.7.130:1026` |
-| IoT Agent | `http://35.198.7.130:4041` |
-| STH-Comet | `http://35.198.7.130:8666` |
-| MQTT | `35.198.7.130:1883` |
+| IP da VM | `00.000.0.000` |
+| Orion | `http://00.000.0.000:1026` |
+| IoT Agent | `http://00.000.0.000:4041` |
+| STH-Comet | `http://00.000.0.000:8666` |
+| MQTT | `00.000.0.000:1883` |
 | FIWARE service | `openiot` |
 | FIWARE service path | `/` |
 | API key | `TEF` |
@@ -70,6 +70,8 @@ Valores usados no projeto:
 | Entity ID | `CarePlusToken:token001` |
 | Entity type | `CarePlusToken` |
 | Topico MQTT | `/TEF/token001/attrs` |
+
+Antes de executar, substitua `00.000.0.000` pelo IP publico da VM FIWARE usada na demonstracao.
 
 ## Payload UltraLight
 
@@ -136,3 +138,4 @@ https://github.com/fabiocabrini/fiware
 - RM567680 - Pedro Henrique Tavares Viana
 - RM567855 - David Ernesto Mogollon Gama
 - RM566949 - Roger De Carvalho Paiva
+

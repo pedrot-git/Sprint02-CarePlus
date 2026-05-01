@@ -1,13 +1,13 @@
-{
+﻿{
   "info": {
     "name": "CarePlus Sprint 02 - FIWARE MQTT Token001 - Completo",
-    "description": "Collection revisada para a VM baseada no tutorial FIWARE do professor, com foco em MQTT.\n\nFluxo correto:\n1) Rode os health checks.\n2) Crie o IoT Service.\n3) Crie o device token001.\n4) Rode o Wokwi publicando MQTT em /TEF/token001/attrs.\n5) Consulte Orion em Get Entity - keyValues.\n6) Crie a subscription STH-Comet.\n7) Rode o Wokwi por mais tempo e consulte o histórico.\n\nImportante: a pasta antiga 'Simular Telemetria sem Wokwi' via HTTP na porta 7896 foi removida, porque nesta VM o caminho principal é MQTT pela porta 1883. O Postman aqui fica para provisionar, diagnosticar, consultar Orion e consultar STH-Comet.",
+    "description": "Collection revisada para a VM baseada no tutorial FIWARE do professor, com foco em MQTT.\n\nFluxo correto:\n1) Rode os health checks.\n2) Crie o IoT Service.\n3) Crie o device token001.\n4) Rode o Wokwi publicando MQTT em /TEF/token001/attrs.\n5) Consulte Orion em Get Entity - keyValues.\n6) Crie a subscription STH-Comet.\n7) Rode o Wokwi por mais tempo e consulte o histÃ³rico.\n\nImportante: a pasta antiga 'Simular Telemetria sem Wokwi' via HTTP na porta 7896 foi removida, porque nesta VM o caminho principal Ã© MQTT pela porta 1883. O Postman aqui fica para provisionar, diagnosticar, consultar Orion e consultar STH-Comet.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "url",
-      "value": "35.198.7.130",
+      "value": "00.000.0.000",
       "type": "string"
     },
     {
@@ -49,7 +49,7 @@
   "item": [
     {
       "name": "0. Diagnostico da VM",
-      "description": "Use primeiro. Se esses endpoints não responderem, o problema é VM, IP, Docker ou portas.",
+      "description": "Use primeiro. Se esses endpoints nÃ£o responderem, o problema Ã© VM, IP, Docker ou portas.",
       "item": [
         {
           "name": "Orion - version",
@@ -93,7 +93,7 @@
               }
             ],
             "url": "http://{{url}}:1026/v2/entities?options=keyValues&limit=100",
-            "description": "Diagnóstico geral. Mostra todas as entidades visíveis com o service/servicepath atuais."
+            "description": "DiagnÃ³stico geral. Mostra todas as entidades visÃ­veis com o service/servicepath atuais."
           }
         },
         {
@@ -111,7 +111,7 @@
               }
             ],
             "url": "http://{{url}}:4041/iot/services",
-            "description": "Diagnóstico do serviço IoT Agent. Confirme apikey TEF e resource /iot/d."
+            "description": "DiagnÃ³stico do serviÃ§o IoT Agent. Confirme apikey TEF e resource /iot/d."
           }
         },
         {
@@ -129,14 +129,14 @@
               }
             ],
             "url": "http://{{url}}:4041/iot/devices",
-            "description": "Diagnóstico de devices. Confirme se token001 existe."
+            "description": "DiagnÃ³stico de devices. Confirme se token001 existe."
           }
         }
       ]
     },
     {
       "name": "1. Reset opcional",
-      "description": "Use apenas quando quiser limpar e recomeçar. 404 em DELETE pode ser normal quando o item já não existe.",
+      "description": "Use apenas quando quiser limpar e recomeÃ§ar. 404 em DELETE pode ser normal quando o item jÃ¡ nÃ£o existe.",
       "item": [
         {
           "name": "Delete Orion Entity",
@@ -153,7 +153,7 @@
               }
             ],
             "url": "http://{{url}}:1026/v2/entities/{{entityId}}",
-            "description": "Pode retornar 204 se apagou ou 404 se a entidade ainda não existia."
+            "description": "Pode retornar 204 se apagou ou 404 se a entidade ainda nÃ£o existia."
           }
         },
         {
@@ -171,7 +171,7 @@
               }
             ],
             "url": "http://{{url}}:4041/iot/devices/{{deviceId}}",
-            "description": "Pode retornar 204 se apagou ou 404 se o device ainda não existia."
+            "description": "Pode retornar 204 se apagou ou 404 se o device ainda nÃ£o existia."
           }
         },
         {
@@ -204,7 +204,7 @@
                   "    console.log(\"subscriptionId salvo:\", sub.id);",
                   "  }",
                   "} catch (e) {",
-                  "  console.log(\"Não foi possível ler subscriptions:\", e);",
+                  "  console.log(\"NÃ£o foi possÃ­vel ler subscriptions:\", e);",
                   "}"
                 ],
                 "type": "text/javascript"
@@ -245,14 +245,14 @@
               }
             ],
             "url": "http://{{url}}:4041/iot/services?resource=/iot/d&apikey={{apiKey}}",
-            "description": "Apaga o IoT Service. Use só em reset completo."
+            "description": "Apaga o IoT Service. Use sÃ³ em reset completo."
           }
         }
       ]
     },
     {
       "name": "2. Setup IoT Agent + Device",
-      "description": "Crie primeiro o IoT Service, depois o device token001. Se retornar 409, provavelmente já existe.",
+      "description": "Crie primeiro o IoT Service, depois o device token001. Se retornar 409, provavelmente jÃ¡ existe.",
       "item": [
         {
           "name": "Create IoT Service MQTT TEF",
@@ -273,7 +273,7 @@
               }
             ],
             "url": "http://{{url}}:4041/iot/services",
-            "description": "Cria o serviço UltraLight/MQTT com apiKey TEF e resource /iot/d.",
+            "description": "Cria o serviÃ§o UltraLight/MQTT com apiKey TEF e resource /iot/d.",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"services\": [\n    {\n      \"apikey\": \"{{apiKey}}\",\n      \"cbroker\": \"http://orion:1026\",\n      \"entity_type\": \"{{entityType}}\",\n      \"resource\": \"/iot/d\"\n    }\n  ]\n}"
@@ -364,7 +364,7 @@
     },
     {
       "name": "3. Publicacao MQTT pelo Wokwi",
-      "description": "Esta pasta não publica MQTT pelo Postman. Ela serve como checklist do que o Wokwi deve fazer.\nNo seu sketch, o ESP32 deve publicar no broker {{url}}:1883 e no tópico /TEF/token001/attrs.\nPayload esperado no Serial Monitor: s|tracking|p|0|st|...|ps|...|v|...|tp|...|b|...|r|...|al|...|ax|...|ay|...|az|...\nDepois que o Wokwi publicar uma telemetria válida, a entidade deve aparecer no Orion.",
+      "description": "Esta pasta nÃ£o publica MQTT pelo Postman. Ela serve como checklist do que o Wokwi deve fazer.\nNo seu sketch, o ESP32 deve publicar no broker {{url}}:1883 e no tÃ³pico /TEF/token001/attrs.\nPayload esperado no Serial Monitor: s|tracking|p|0|st|...|ps|...|v|...|tp|...|b|...|r|...|al|...|ax|...|ay|...|az|...\nDepois que o Wokwi publicar uma telemetria vÃ¡lida, a entidade deve aparecer no Orion.",
       "item": [
         {
           "name": "Checklist - antes de abrir Orion",
@@ -372,14 +372,14 @@
             "method": "GET",
             "header": [],
             "url": "http://{{url}}:1026/version",
-            "description": "Checklist manual:\n1) Wokwi conectado ao Wi-Fi.\n2) MQTT conectado.\n3) Serial Monitor mostrando 'telemetria publicada com sucesso'.\n4) Tópico usado: /TEF/token001/attrs.\n5) Payload usa object_ids s, p, st, ps, v, tp, b, r, al, ax, ay, az."
+            "description": "Checklist manual:\n1) Wokwi conectado ao Wi-Fi.\n2) MQTT conectado.\n3) Serial Monitor mostrando 'telemetria publicada com sucesso'.\n4) TÃ³pico usado: /TEF/token001/attrs.\n5) Payload usa object_ids s, p, st, ps, v, tp, b, r, al, ax, ay, az."
           }
         }
       ]
     },
     {
       "name": "4. Consultas Orion - Estado Atual",
-      "description": "Use depois que o Wokwi publicar pelo menos uma telemetria MQTT válida.",
+      "description": "Use depois que o Wokwi publicar pelo menos uma telemetria MQTT vÃ¡lida.",
       "item": [
         {
           "name": "Get Entity - keyValues",
@@ -396,7 +396,7 @@
               }
             ],
             "url": "http://{{url}}:1026/v2/entities/{{entityId}}?options=keyValues",
-            "description": "Se retornar 404, a entidade ainda não recebeu telemetria válida ou service/servicepath/entityId estão diferentes."
+            "description": "Se retornar 404, a entidade ainda nÃ£o recebeu telemetria vÃ¡lida ou service/servicepath/entityId estÃ£o diferentes."
           }
         },
         {
@@ -511,7 +511,7 @@
     },
     {
       "name": "5. STH-Comet - Subscription",
-      "description": "Crie a subscription depois que a entidade já existir no Orion. Depois rode o Wokwi por mais tempo para gerar histórico.",
+      "description": "Crie a subscription depois que a entidade jÃ¡ existir no Orion. Depois rode o Wokwi por mais tempo para gerar histÃ³rico.",
       "item": [
         {
           "name": "Create Subscription to STH-Comet",
@@ -549,7 +549,7 @@
                   "  pm.collectionVariables.set(\"subscriptionId\", match[1]);",
                   "  console.log(\"subscriptionId salvo:\", match[1]);",
                   "}",
-                  "pm.test(\"Subscription criada ou já existente\", function () {",
+                  "pm.test(\"Subscription criada ou jÃ¡ existente\", function () {",
                   "  pm.expect([201, 409]).to.include(pm.response.code);",
                   "});"
                 ],
@@ -573,7 +573,7 @@
               }
             ],
             "url": "http://{{url}}:1026/v2/subscriptions",
-            "description": "Confirme se existe uma subscription com descrição CarePlus token001 telemetry to STH-Comet."
+            "description": "Confirme se existe uma subscription com descriÃ§Ã£o CarePlus token001 telemetry to STH-Comet."
           },
           "event": [
             {
@@ -588,7 +588,7 @@
                   "    console.log(\"subscriptionId salvo:\", sub.id);",
                   "  }",
                   "} catch (e) {",
-                  "  console.log(\"Não foi possível ler subscriptions:\", e);",
+                  "  console.log(\"NÃ£o foi possÃ­vel ler subscriptions:\", e);",
                   "}"
                 ],
                 "type": "text/javascript"
@@ -618,7 +618,7 @@
     },
     {
       "name": "6. STH-Comet - Historico por atributo",
-      "description": "Consultas do histórico usado pelo Colab/dashboard. Use depois da subscription e depois de gerar novas telemetrias no Wokwi.",
+      "description": "Consultas do histÃ³rico usado pelo Colab/dashboard. Use depois da subscription e depois de gerar novas telemetrias no Wokwi.",
       "item": [
         {
           "name": "STH state lastN 100",
@@ -635,7 +635,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/state?lastN=100",
-            "description": "Histórico do atributo state. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo state. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -653,7 +653,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/pressCount?lastN=100",
-            "description": "Histórico do atributo pressCount. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo pressCount. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -671,7 +671,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/steps?lastN=100",
-            "description": "Histórico do atributo steps. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo steps. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -689,7 +689,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/pendingSteps?lastN=100",
-            "description": "Histórico do atributo pendingSteps. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo pendingSteps. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -707,7 +707,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/tokenValue?lastN=100",
-            "description": "Histórico do atributo tokenValue. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo tokenValue. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -725,7 +725,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/totalPoints?lastN=100",
-            "description": "Histórico do atributo totalPoints. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo totalPoints. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -743,7 +743,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/batteryLevel?lastN=100",
-            "description": "Histórico do atributo batteryLevel. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo batteryLevel. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -761,7 +761,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/rssi?lastN=100",
-            "description": "Histórico do atributo rssi. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo rssi. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -779,7 +779,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/activityLevel?lastN=100",
-            "description": "Histórico do atributo activityLevel. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo activityLevel. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -797,7 +797,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/accelX?lastN=100",
-            "description": "Histórico do atributo accelX. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo accelX. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -815,7 +815,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/accelY?lastN=100",
-            "description": "Histórico do atributo accelY. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo accelY. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         },
         {
@@ -833,7 +833,7 @@
               }
             ],
             "url": "http://{{url}}:8666/STH/v1/contextEntities/type/{{entityType}}/id/{{entityId}}/attributes/accelZ?lastN=100",
-            "description": "Histórico do atributo accelZ. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
+            "description": "HistÃ³rico do atributo accelZ. Se vier vazio, crie a subscription, rode o Wokwi e tente novamente."
           }
         }
       ]
@@ -875,7 +875,7 @@
               }
             ],
             "url": "http://{{url}}:4041/iot/devices/{{deviceId}}",
-            "description": "Se der 404 aqui, o device não foi provisionado no IoT Agent."
+            "description": "Se der 404 aqui, o device nÃ£o foi provisionado no IoT Agent."
           }
         },
         {
@@ -911,7 +911,7 @@
               }
             ],
             "url": "http://{{url}}:1026/v2/entities?type={{entityType}}&options=keyValues",
-            "description": "Se vazio, a entidade não existe com type CarePlusToken."
+            "description": "Se vazio, a entidade nÃ£o existe com type CarePlusToken."
           }
         },
         {
@@ -920,7 +920,7 @@
             "method": "GET",
             "header": [],
             "url": "http://{{url}}:1026/version",
-            "description": "Se falhar, o problema é conexão com a VM/IP/porta 1026, não entityId."
+            "description": "Se falhar, o problema Ã© conexÃ£o com a VM/IP/porta 1026, nÃ£o entityId."
           }
         }
       ]

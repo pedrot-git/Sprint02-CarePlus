@@ -1,4 +1,4 @@
-#include <WiFi.h>
+﻿#include <WiFi.h>
 #include <PubSubClient.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -35,7 +35,7 @@ Adafruit_MPU6050 mpu;
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
 
-const char* mqttServer = "35.198.7.130";
+const char* mqttServer = "00.000.0.000";
 const int mqttPort = 1883;
 const char* mqttTopic = "/TEF/token001/attrs";
 

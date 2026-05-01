@@ -1,12 +1,14 @@
-# Manual de Operacao
+﻿# Manual de Operacao
 
 ## 1. Preparar FIWARE
 
 Suba a VM e confirme que os containers estao ativos. A collection Postman possui health checks para:
 
-- Orion: `http://35.198.7.130:1026/version`
-- IoT Agent: `http://35.198.7.130:4041/version`
-- STH-Comet: `http://35.198.7.130:8666/version`
+- Orion: `http://00.000.0.000:1026/version`
+- IoT Agent: `http://00.000.0.000:4041/version`
+- STH-Comet: `http://00.000.0.000:8666/version`
+
+Substitua `00.000.0.000` pelo IP publico da VM FIWARE antes de rodar a collection, o Wokwi ou o dashboard Colab.
 
 ## 2. Provisionar IoT Agent
 
@@ -24,7 +26,7 @@ Abra o projeto Wokwi com os arquivos da pasta `wokwi/`.
 Confira no `sketch.ino`:
 
 ```cpp
-const char* mqttServer = "35.198.7.130";
+const char* mqttServer = "00.000.0.000";
 const int mqttPort = 1883;
 const char* mqttTopic = "/TEF/token001/attrs";
 ```
@@ -67,4 +69,5 @@ Se a VM nao responder:
 - Verifique se a VM esta ligada.
 - Verifique se os containers Docker estao rodando.
 - Verifique firewall/regras de rede para as portas `1026`, `4041`, `8666` e `1883`.
+
 
